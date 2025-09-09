@@ -1320,7 +1320,7 @@
                 <p class="section-subtitle">Discover our delicious offerings</p>
                 
                 <div class="menu-images-grid">
-                    <div class="menu-item">
+                    <div class="menu-item" onclick="openMenuModal('images/menu1.PNG')">
                         <img src="images/menu1.PNG" alt="Barizi Menu - Main Dishes, Breakfast & Hot Beverages">
                         <div class="menu-caption">
                             <h3>Main Dishes & Breakfast</h3>
@@ -1328,7 +1328,7 @@
                         </div>
                     </div>
                     
-                    <div class="menu-item">
+                    <div class="menu-item" onclick="openMenuModal('images/menu2.PNG')">
                         <img src="images/menu2.PNG" alt="Barizi Menu - Snacks & Beverages">
                         <div class="menu-caption">
                             <h3>Snacks & Beverages</h3>
@@ -1339,6 +1339,13 @@
             </div>
         </section>
         
+        <!-- Menu Modal -->
+        <div id="menuModal" class="menu-modal">
+            <span class="menu-modal-close" onclick="closeMenuModal()">&times;</span>
+            <div class="menu-modal-content">
+                <img id="menuModalImage" src="" alt="Barizi Gardens Resort Menu">
+            </div>
+        </div>
         
         <section id="gallery" class="gallery section">
             <div class="container">
@@ -1464,13 +1471,13 @@
     </footer>
     
     <script>
-        // Image modal functionality
-        function openModal(imageName) {
+        // Image modal functionality for gallery
+        function openModal(imageSrc) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
             modal.style.display = 'block';
-            modalImg.src = `https://www.barizigardensresort.com/images/${imageName}.jpg`;
-            modalImg.alt = `Barizi Gardens Resort ${imageName.replace('-', ' ')}`;
+            modalImg.src = imageSrc;
+            modalImg.alt = 'Barizi Gardens Resort Facility';
             document.body.style.overflow = 'hidden';
         }
         
@@ -1478,6 +1485,35 @@
             const modal = document.getElementById('imageModal');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
+        }
+        
+        // Menu modal functionality
+        function openMenuModal(menuSrc) {
+            const modal = document.getElementById('menuModal');
+            const modalImg = document.getElementById('menuModalImage');
+            modal.style.display = 'block';
+            modalImg.src = menuSrc;
+            modalImg.alt = 'Barizi Gardens Resort Menu';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMenuModal() {
+            const modal = document.getElementById('menuModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modals when clicking outside the image
+        window.onclick = function(event) {
+            const imageModal = document.getElementById('imageModal');
+            const menuModal = document.getElementById('menuModal');
+            
+            if (event.target == imageModal) {
+                closeModal();
+            }
+            if (event.target == menuModal) {
+                closeMenuModal();
+            }
         }
         
         // Smooth scrolling for navigation links
@@ -1555,8 +1591,13 @@
         
         // Keyboard navigation support
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && document.getElementById('imageModal').style.display === 'block') {
-                closeModal();
+            if (e.key === 'Escape') {
+                if (document.getElementById('imageModal').style.display === 'block') {
+                    closeModal();
+                }
+                if (document.getElementById('menuModal').style.display === 'block') {
+                    closeMenuModal();
+                }
             }
         });
         
