@@ -1,11 +1,11 @@
 # Robots.txt for Barizi Gardens Resort
-# www.barizigardensresort.com
+# www.barizigardensresort.co.ke
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://www.barizigardensresort.com/sitemap.xml
+Sitemap: https://www.barizigardensresort.co.ke/sitemap.xml
 
 # Allow all major search engines
 User-agent: Googlebot
