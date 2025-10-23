@@ -13,19 +13,12 @@
   <priority>1.0</priority>
 </url>
 
-<url>
-  <loc>https://www.barizigardensresort.co.ke/index.html</loc>
-  <lastmod>2025-10-13T00:00:00+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>1.0</priority>
-</url>
-
 <!-- Blog Section -->
 <url>
   <loc>https://www.barizigardensresort.co.ke/blog.html</loc>
   <lastmod>2025-10-13T00:00:00+00:00</lastmod>
   <changefreq>weekly</changefreq>
-  <priority>0.9</priority>
+  <priority>0.8</priority>
 </url>
 
 <!-- Location-Specific Service Pages -->
@@ -55,7 +48,7 @@
   <loc>https://www.barizigardensresort.co.ke/contact.html</loc>
   <lastmod>2025-10-13T00:00:00+00:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
+  <priority>0.7</priority>
 </url>
 
 </urlset>
