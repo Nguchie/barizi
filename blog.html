@@ -524,7 +524,7 @@
             
             noResults.style.display = 'none';
             blogGrid.innerHTML = posts.map(post => `
-                <div class="blog-card" onclick="openBlogPost(${post.id})">
+                <div class="blog-card" onclick="openBlogPost('${post.slug}')">
                     <img src="${post.image}" alt="${post.title}" class="blog-card-image">
                     <div class="blog-card-content">
                         <span class="blog-category">${post.category}</span>
@@ -532,7 +532,7 @@
                         <p class="blog-excerpt">${post.excerpt}</p>
                         <div class="blog-meta">
                             <span>${formatDate(post.date)}</span>
-                            <a href="#" class="read-more" onclick="event.stopPropagation(); openBlogPost(${post.id})">Read More →</a>
+                            <a href="#" class="read-more" onclick="event.stopPropagation(); openBlogPost('${post.slug}')">Read More →</a>
                         </div>
                     </div>
                 </div>
@@ -567,8 +567,8 @@
         }
         
         // Open blog post in modal
-        function openBlogPost(postId) {
-            const post = allPosts.find(p => p.id == postId);
+        function openBlogPost(postSlug) {
+            const post = allPosts.find(p => p.slug === postSlug || p.id == postSlug);
             if (!post) return;
             
             const modal = document.getElementById('blogModal');
@@ -577,6 +577,10 @@
             
             modalImage.src = post.image;
             modalImage.alt = post.title;
+            
+            // Update URL to SEO-friendly slug
+            const newUrl = `blog.html#${post.slug}`;
+            window.history.pushState({page: post.slug}, '', newUrl);
             
             modalBody.innerHTML = `
                 <span class="blog-category">${post.category}</span>
@@ -589,6 +593,20 @@
             
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
+            
+            // Add canonical link for SEO
+            updateCanonicalLink(newUrl);
+        }
+        
+        // Update canonical link for SEO
+        function updateCanonicalLink(url) {
+            let canonical = document.querySelector('link[rel="canonical"]');
+            if (!canonical) {
+                canonical = document.createElement('link');
+                canonical.rel = 'canonical';
+                document.head.appendChild(canonical);
+            }
+            canonical.href = `https://www.barizigardensresort.co.ke/${url}`;
         }
         
         // Close modal
